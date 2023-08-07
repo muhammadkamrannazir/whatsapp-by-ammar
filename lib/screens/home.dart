@@ -23,38 +23,6 @@ class _HomescreenState extends State<Homescreen>
       length: 4,
       initialIndex: _currentIndex,
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      
-        floatingActionButton:
-            _currentIndex != 0 // Show FAB on all tabs except the first tab
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      _currentIndex == 2
-                          ? FloatingActionButton.small(
-                              backgroundColor: Colors.black54,
-                              onPressed: () {},
-                              child: const Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            )
-                          : const SizedBox(),
-                      const SizedBox(height: 15),
-                      FloatingActionButton(
-                        backgroundColor: Colors.green,
-                        onPressed: () {},
-                        child: Icon(
-                          _currentIndex == 1
-                              ? Icons.message
-                              : _currentIndex == 2
-                                  ? Icons.camera_alt_rounded
-                                  : Icons.add_ic_call,
-                        ),
-                      )
-                    ],
-                  )
-                : const SizedBox(),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 124, 230, 11),
           title: const Text(
@@ -130,6 +98,37 @@ class _HomescreenState extends State<Homescreen>
             const Callscreen(),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton:
+            _currentIndex != 0 // Show FAB on all tabs except the first tab
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _currentIndex == 2
+                          ? FloatingActionButton.small(
+                              backgroundColor: Colors.black54,
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
+                            )
+                          : const SizedBox(),
+                      const SizedBox(height: 15),
+                      FloatingActionButton(
+                        backgroundColor: Colors.green,
+                        onPressed: () {},
+                        child: Icon(
+                          _currentIndex == 1
+                              ? Icons.message
+                              : _currentIndex == 2
+                                  ? Icons.camera_alt_rounded
+                                  : Icons.add_ic_call,
+                        ),
+                      )
+                    ],
+                  )
+                : const SizedBox(),
       ),
     );
   }

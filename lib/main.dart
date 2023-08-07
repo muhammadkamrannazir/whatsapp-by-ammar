@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whatsapp_clone/screens/features/camera_windows.dart';
+import 'package:whatsapp_clone/screens/home.dart';
 import 'package:whatsapp_clone/screens/username.dart';
 
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Usernametap(),
+      home: CameraForWindows()
     );
   }
 }
