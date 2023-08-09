@@ -348,8 +348,8 @@ class _CameraForWindowsState extends State<CameraForWindows> {
               child: const Text('Re-check available cameras'),
             ),
           if (_cameras.isNotEmpty)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 DropdownButton<ResolutionPreset>(
                   value: _resolutionPreset,
