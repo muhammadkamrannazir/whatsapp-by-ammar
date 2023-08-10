@@ -17,20 +17,20 @@ class Attachmentwidget extends StatelessWidget {
         children: [
           Wrap(
             children: [
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.red,
-                  Colors.redAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.pink,
-                  Colors.pinkAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.teal,
-                  Colors.tealAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.orange,
+              actionWidgets('Document', Icons.file_open, Colors.purple,
+                  Colors.purpleAccent),
+              actionWidgets(
+                  'camera', Icons.camera_alt, Colors.pink, Colors.pinkAccent),
+              actionWidgets('Gallery', Icons.photo, Colors.purple.shade300,
+                  Colors.purpleAccent),
+              actionWidgets('Audio', Icons.headphones_rounded, Colors.orange,
                   Colors.orangeAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.amber,
-                  Colors.amberAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.green,
+              actionWidgets('Location', Icons.edit_location_alt_outlined,
+                  Colors.green, Colors.greenAccent),
+              actionWidgets(
+                  'contact', Icons.person, Colors.blue, Colors.blueAccent),
+              actionWidgets('Document', Icons.poll_outlined, Colors.green,
                   Colors.greenAccent),
-              actionWidgets('Document', Icons.camera_alt_rounded, Colors.blue,
-                  Colors.blueAccent),
             ],
           ),
         ],

@@ -3,7 +3,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whatsapp_clone/screens/Chats.dart';
+import 'package:whatsapp_clone/screens/tabs/Chats.dart';
 import 'package:whatsapp_clone/screens/home.dart';
 import 'package:whatsapp_clone/screens/username.dart';
 import 'package:whatsapp_clone/utils/colors.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/screens/call.dart';
-import 'package:whatsapp_clone/screens/Chats.dart';
-import 'package:whatsapp_clone/screens/group.dart';
-import 'package:whatsapp_clone/screens/status.dart';
-import 'package:whatsapp_clone/widgets/three_dots.dart';
+import 'package:get/get.dart';
+import 'package:whatsapp_clone/screens/tabs/call.dart';
+import 'package:whatsapp_clone/screens/tabs/Chats.dart';
+import 'package:whatsapp_clone/screens/tabs/group.dart';
+import 'package:whatsapp_clone/screens/setting_screen.dart';
+import 'package:whatsapp_clone/screens/tabs/status.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _HomescreenState extends State<Homescreen>
       initialIndex: _currentIndex,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 124, 230, 11),
           title: const Text(
             "Whatsapp",
@@ -38,16 +40,15 @@ class _HomescreenState extends State<Homescreen>
               onPressed: () {},
               icon: const Icon(Icons.search_outlined),
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Threedots(),
-                  ),
-                );
+            PopupMenuButton(
+              onSelected: (value) {
+                if (value == 'Settings') {
+                  Get.to(const Settingscreen());
+                }
               },
-              icon: const Icon(Icons.more_vert),
+              itemBuilder: (context) {
+                return morehoriz();
+              },
             ),
           ],
           bottom: TabBar(
@@ -77,10 +78,8 @@ class _HomescreenState extends State<Homescreen>
                   text: 'Status', // Show current index on tab 2
                 ),
               ),
-              Expanded(
-                child: Tab(
-                  text: 'Calls', // Show current index on tab 3
-                ),
+              Tab(
+                text: 'Calls', // Show current index on tab 3
               ),
             ],
           ),
@@ -130,6 +129,42 @@ class _HomescreenState extends State<Homescreen>
                   )
                 : const SizedBox(),
       ),
+    );
+  }
+
+  morehoriz() {
+    if (_currentIndex == 0) {
+      return [
+        settingPopUpButton(),
+      ];
+    } else if (_currentIndex == 1) {
+      return [
+        const PopupMenuItem(child: Text('New group')),
+        const PopupMenuItem(child: Text('New Broadcast')),
+        const PopupMenuItem(child: Text('Linked devices')),
+        const PopupMenuItem(child: Text('Starred messages')),
+        settingPopUpButton(),
+      ];
+    } else if (_currentIndex == 2) {
+      return [
+        const PopupMenuItem(child: Text('Status Privacy')),
+        settingPopUpButton(),
+      ];
+    } else {
+      return [
+        const PopupMenuItem(child: Text('Clear call log')),
+        settingPopUpButton(),
+      ];
+    }
+  }
+
+  PopupMenuEntry settingPopUpButton() {
+    return PopupMenuItem(
+      value: 'Settings',
+      onTap: () {
+        Get.to(const Settingscreen());
+      },
+      child: const Text('Setting'),
     );
   }
 }

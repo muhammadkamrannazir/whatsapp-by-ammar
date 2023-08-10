@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_clone/screens/features/camera_windows.dart';
@@ -15,8 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: CameraForWindows()
-    );
+        debugShowCheckedModeBanner: false, home: Homescreen());
   }
 }
