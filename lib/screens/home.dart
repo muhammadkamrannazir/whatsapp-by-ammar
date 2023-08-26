@@ -5,6 +5,7 @@ import 'package:whatsapp_clone/screens/tabs/Chats.dart';
 import 'package:whatsapp_clone/screens/tabs/group.dart';
 import 'package:whatsapp_clone/screens/setting_screen.dart';
 import 'package:whatsapp_clone/screens/tabs/status.dart';
+import 'package:whatsapp_clone/utils/colors.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen>
 //  with TickerProviderStateMixin
 {
+  bool searchclicked = false;
   int _currentIndex = 1; // Store the current index as a member variable
 
   @override
@@ -24,66 +26,88 @@ class _HomescreenState extends State<Homescreen>
       length: 4,
       initialIndex: _currentIndex,
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: const Color.fromARGB(255, 124, 230, 11),
-          title: const Text(
-            "Whatsapp",
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.camera_alt_outlined),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search_outlined),
-            ),
-            PopupMenuButton(
-              onSelected: (value) {
-                if (value == 'Settings') {
-                  Get.to(const Settingscreen());
-                }
-              },
-              itemBuilder: (context) {
-                return morehoriz();
-              },
-            ),
-          ],
-          bottom: TabBar(
-            indicatorSize: _currentIndex == 0
-                ? TabBarIndicatorSize.label
-                : TabBarIndicatorSize.tab,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index; // Update the current index
-              });
-            },
-            tabs: const [
-              SizedBox(
-                width: 25,
-                child: Tab(
-                  icon: Icon(Icons.person_add_sharp),
+        appBar: searchclicked == false
+            ? AppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: const Color.fromARGB(255, 124, 230, 11),
+                title: const Text(
+                  "Whatsapp",
+                  style: TextStyle(color: Colors.white),
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.camera_alt_outlined),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      searchclicked = true;
+                      setState(() {});
+                    },
+                    icon: const Icon(Icons.search_outlined),
+                  ),
+                  PopupMenuButton(
+                    onSelected: (value) {
+                      if (value == 'Setting') {
+                        Get.to(const Settingscreen());
+                      }
+                    },
+                    itemBuilder: (context) {
+                      return morehoriz();
+                    },
+                  ),
+                ],
+                bottom: TabBar(
+                  indicatorSize: _currentIndex == 0
+                      ? TabBarIndicatorSize.label
+                      : TabBarIndicatorSize.tab,
+                  onTap: (index) {
+                    setState(() {
+                      _currentIndex = index; // Update the current index
+                    });
+                  },
+                  tabs: const [
+                    SizedBox(
+                      width: 25,
+                      child: Tab(
+                        icon: Icon(Icons.person_add_sharp),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 90,
+                      child: Tab(
+                        text: 'Chats', // Show current index on tab 1
+                      ),
+                    ),
+                    SizedBox(
+                      child: Tab(
+                        text: 'Status', // Show current index on tab 2
+                      ),
+                    ),
+                    Tab(
+                      text: 'Calls', // Show current index on tab 3
+                    ),
+                  ],
+                ),
+              )
+            : AppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                title: TextField(
+                  autocorrect: true,
+                  cursorColor: AppColors.green,
+                  decoration: InputDecoration(
+                      prefixIcon: IconButton(
+                          onPressed: () {
+                            searchclicked = false;
+                            setState(() {});
+                          },
+                          icon: const Icon(Icons.arrow_back)),
+                      focusedBorder: InputBorder.none,
+                      hintText: 'Search...',
+                      hintStyle: const TextStyle()),
                 ),
               ),
-              SizedBox(
-                width: 90,
-                child: Tab(
-                  text: 'Chats', // Show current index on tab 1
-                ),
-              ),
-              SizedBox(
-                child: Tab(
-                  text: 'Status', // Show current index on tab 2
-                ),
-              ),
-              Tab(
-                text: 'Calls', // Show current index on tab 3
-              ),
-            ],
-          ),
-        ),
         body: TabBarView(
           // controller: TabController(
           //   length: 4,
@@ -139,7 +163,10 @@ class _HomescreenState extends State<Homescreen>
       ];
     } else if (_currentIndex == 1) {
       return [
-        const PopupMenuItem(child: Text('New group')),
+        const PopupMenuItem(
+          value: 'Setting',
+          child: Text('New group'),
+        ),
         const PopupMenuItem(child: Text('New Broadcast')),
         const PopupMenuItem(child: Text('Linked devices')),
         const PopupMenuItem(child: Text('Starred messages')),
@@ -153,16 +180,23 @@ class _HomescreenState extends State<Homescreen>
     } else {
       return [
         const PopupMenuItem(child: Text('Clear call log')),
-        settingPopUpButton(),
+        PopupMenuItem(
+          value: 'Setting',
+          onTap: () {
+            Get.to(const Settingscreen());
+          },
+          child: const Text('Setting'),
+        ),
       ];
     }
   }
 
   PopupMenuEntry settingPopUpButton() {
     return PopupMenuItem(
-      value: 'Settings',
+      value: 'Setting',
       onTap: () {
-        Get.to(const Settingscreen());
+        Get.off(() => const Settingscreen());
+        print('something');
       },
       child: const Text('Setting'),
     );

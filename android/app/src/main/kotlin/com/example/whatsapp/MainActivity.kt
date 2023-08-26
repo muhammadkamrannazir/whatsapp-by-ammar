@@ -1,4 +1,4 @@
-package com.example.whatsapp
+package com.ammar.whatsapp
 
 import io.flutter.embedding.android.FlutterActivity
 
